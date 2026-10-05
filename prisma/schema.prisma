@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────
+// Lyria Health — Waiting list (GDPR / PECR double opt-in)
+//
+// Data minimisation: we store ONLY name, email and optional
+// tier of interest. No health data is collected at any point.
+// ─────────────────────────────────────────────────────────────
+
+/// A person on the waiting list.
+/// Status lifecycle: PENDING → CONFIRMED → (UNSUBSCRIBED)
+model Subscriber {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String
+  /// "essential" | "plus" | "premium" | null (optional field)
+  tierInterest   String?
+  /// PENDING | CONFIRMED | UNSUBSCRIBED
+  status         String    @default("PENDING")
+  /// Token used in the double opt-in confirmation link
+  confirmToken   String    @unique
+  /// Token used for one-click unsubscribe links
+  unsubToken     String    @unique
+  /// Where the signup came from: "hero" | "footer"
+  source         String    @default("hero")
+  createdAt      DateTime  @default(now())
+  confirmedAt    DateTime?
+  unsubscribedAt DateTime?
+
+  consentLogs ConsentLog[]
+}
+
+/// Append-only audit trail proving lawful, documented consent
+/// (UK GDPR Art. 7(1) — "accountability"). Every consent-related
+/// event is recorded with the exact wording shown and its version.
+model ConsentLog {
+  id             String     @id @default(cuid())
+  subscriberId   String?
+  /// Email is stored only as a salted SHA-256 hash here so the
+  /// audit trail survives erasure requests without keeping PII.
+  subscriberHash String?
+  /// SIGNUP_CONSENT | DOUBLE_OPT_IN_CONFIRMED | UNSUBSCRIBED | RESUBSCRIBED | DATA_DELETED
+  event          String
+  /// Version of the consent wording shown to the user, e.g. "v1.0"
+  wordingVersion String
+  /// The exact consent sentence displayed at the moment of signup
+  wordingText    String
+  /// "hero" | "footer"
+  source         String
+  /// Salted hash of IP (raw IP is never persisted)
+  ipHash         String?
+  userAgent      String?
+  createdAt      DateTime   @default(now())
+
+  subscriber Subscriber? @relation(fields: [subscriberId], references: [id], onDelete: SetNull)
+
+  @@index([subscriberId])
+  @@index([event])
+}

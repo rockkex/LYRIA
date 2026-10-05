@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///Users/biyaserabuelgasim/Downloads/lyria-landing%20(3).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyria — Healthcare before you need it</title>
+<meta name="description" content="A UK healthcare membership offering fast private GP consultations and tiered biomarker blood-test screening. Join the waitlist — launching once CQC registration is confirmed.">
+<meta property="og:title" content="Lyria — Healthcare before you need it">
+<meta property="og:description" content="Fast GP consultations and biomarker screening, in one membership. Join the waitlist.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lyria — Healthcare before you need it">
+<meta name="twitter:description" content="Fast GP consultations and biomarker screening, in one membership. Join the waitlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./Lyria — Healthcare before you need it_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2C47;
+    --ink-soft:#4A5872;
+    --paper:#F4F0E8;
+    --paper-raised:#FBF9F4;
+    --teal:#2A3F63;
+    --teal-deep:#1B2C47;
+    --gold:#A9823D;
+    --line:#DCD5C4;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  /* Header */
+  header{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .header-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand-row{display:flex;align-items:center;gap:14px;}
+  .brand-icon{height:44px;width:auto;display:block;}
+  .wordmark-group{display:flex;flex-direction:column;gap:2px;}
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--ink);
+  }
+  .strapline{
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--gold);
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .header-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:6px 14px;
+    border-radius:100px;
+  }
+
+  /* Hero */
+  .hero{
+    padding:88px 0 96px;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:64px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding:56px 0 64px;gap:40px;}
+  }
+  .hero h1{
+    font-size:clamp(38px, 5vw, 60px);
+    line-height:1.05;
+    margin:0 0 26px;
+    max-width:15ch;
+  }
+  .hero p.lede{
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 34px;
+  }
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    border-radius:4px;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--teal-deep);color:var(--white);}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-ghost{color:var(--ink);border-color:var(--ink);background:transparent;}
+  .btn-ghost:hover{background:var(--ink);color:var(--white);}
+
+  /* Stat ticket */
+  .ticket{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:36px 32px;
+    position:relative;
+  }
+  .ticket::before{
+    content:"";
+    position:absolute;
+    left:0;right:0;top:118px;
+    border-top:1px dashed var(--line);
+  }
+  .ticket-label{
+    font-size:12px;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .ticket-num{
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    font-weight:500;
+    color:var(--teal-deep);
+    line-height:1;
+  }
+  .ticket-sub{font-size:14px;color:var(--ink-soft);margin-top:4px;}
+  .ticket-row{margin-top:34px;padding-top:20px;display:flex;justify-content:space-between;font-size:14px;color:var(--ink-soft);}
+  .ticket-row strong{color:var(--ink);font-weight:600;}
+
+  /* Problem statement */
+  .problem{padding:80px 0;border-top:1px solid var(--line);}
+  .problem blockquote{
+    font-family:'Fraunces', serif;
+    font-size:clamp(24px,3vw,32px);
+    font-weight:400;
+    line-height:1.4;
+    max-width:38ch;
+    margin:0 auto;
+    text-align:center;
+    color:var(--ink);
+  }
+  .problem cite{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    font-style:normal;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* Tiers */
+  .tiers{padding:88px 0;border-top:1px solid var(--line);}
+  .tiers-head{max-width:52ch;margin-bottom:52px;}
+  .tiers-head h2{font-size:34px;margin:0 0 14px;}
+  .tiers-head p{color:var(--ink-soft);font-size:16px;margin:0;}
+  .tier{
+    display:grid;
+    grid-template-columns:120px 1fr auto;
+    gap:32px;
+    align-items:center;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+  }
+  .tier:last-child{border-bottom:1px solid var(--line);}
+  @media (max-width:700px){
+    .tier{grid-template-columns:1fr;gap:12px;text-align:left;}
+  }
+  .tier-num{
+    font-family:'Fraunces', serif;
+    font-size:44px;
+    color:var(--teal-deep);
+    line-height:1;
+  }
+  .tier-num span{display:block;font-family:'Work Sans',sans-serif;font-size:12px;color:var(--ink-soft);margin-top:6px;font-weight:500;}
+  .tier-name{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:8px;}
+  .tier-body h3{font-size:22px;margin:0 0 8px;}
+  .tier-body p{margin:0;color:var(--ink-soft);font-size:15px;max-width:52ch;}
+  .tier-price{text-align:right;white-space:nowrap;}
+  @media (max-width:700px){.tier-price{text-align:left;}}
+  .tier-price .amount{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);}
+  .tier-price .period{font-size:13px;color:var(--ink-soft);}
+
+  /* Founder */
+  .founder{padding:88px 0;border-top:1px solid var(--line);}
+  .founder-grid{display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:start;}
+  @media (max-width:700px){.founder-grid{grid-template-columns:1fr;}}
+  .founder-photo{
+    width:220px;height:220px;border-radius:6px;
+    background:linear-gradient(155deg, var(--gold) 0%, var(--ink) 100%);
+  }
+  .founder h2{font-size:28px;margin:0 0 4px;}
+  .founder .role{font-size:14px;color:var(--gold);font-weight:600;margin-bottom:18px;}
+  .founder p{color:var(--ink-soft);max-width:56ch;margin:0 0 14px;}
+
+  /* Waitlist */
+  .waitlist{padding:88px 0;border-top:1px solid var(--line);}
+  .waitlist-box{
+    background:var(--ink);
+    color:var(--white);
+    border-radius:8px;
+    padding:56px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:center;
+  }
+  @media (max-width:760px){.waitlist-box{grid-template-columns:1fr;padding:36px 28px;}}
+  .waitlist-box h2{color:var(--white);font-size:30px;margin:0 0 14px;}
+  .waitlist-box p{color:#C7D3CE;font-size:15px;margin:0;max-width:40ch;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  input[type="email"]{
+    padding:14px 16px;
+    border-radius:4px;
+    border:1px solid #3A5064;
+    background:#1E3A52;
+    color:var(--white);
+    font-size:15px;
+    font-family:'Work Sans',sans-serif;
+  }
+  input[type="email"]::placeholder{color:#8FA3AE;}
+  .btn-gold{background:var(--gold);color:var(--ink);border:none;padding:14px 22px;border-radius:4px;font-weight:600;font-size:15px;cursor:pointer;}
+  .btn-gold:hover{background:#D69A56;}
+  .form-note{font-size:12px;color:#8FA3AE;margin-top:4px;}
+  .thanks{display:none;font-family:'Fraunces',serif;font-size:20px;color:var(--white);}
+
+  /* Footer */
+  footer{padding:48px 0 64px;border-top:1px solid var(--line);}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;font-size:13px;color:var(--ink-soft);}
+  .disclaimer{
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    max-width:80ch;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand-row">
+      <img src="data:image/png;base64,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m462d333B/f96IEHe/tLbnqGUpZAXPQKTEhIFiJrHZZLLdnU5WsvesvNN1x91WXz5rTabEQH2oQc12sBiiAzCwgS2bayFUDkF/J9XSdP5Pu6CoWe3t6eUjFfKPQbHREppbxsU3NTy4zmma0zZ8zLzZiZa252MmkgLAV0qt/ftn3n089u+PnjTx7dv//N11zxmU//5xvWr+egFOgAyYKa1nupI6M80SPeJ+9Fn2EB1wxYhJWTEmVv3Lz1+/c+8OxLWwqlwHYdshSbmMadQIAUorDRQblctC113qJFl6695OorL730otVz587yXAeYw7CsTcRGCOLqPhbRCKyALCSyLEAx2kRRGJZLxhhjmBRlcjknnUI7BWADg9amvfPkjp07Xtm666WXN+3ctaNYLl9yycUffPc777rlLblc1i8VAAwixJwvIxZsnFMCTijfphDviYhhcdOZyNDLm1794f0PPvfCL/LFopvOWXYKBJhNfMKZER1bujDQQehns6nzlsxfufy8i1etWr1yxaJFc2fMyKa9lK0sAGEOtQnFMDAoIhLkZH+I2XcEAMiyidxAc38+f/x412s79v5y85atr24/cOiwX+pPe9bqVSvuuOPXbn/bLQsXzA3LJTG60pswTsvhGRZwo/bggWriiXNi1O7WImyEiaxUOlcKeeOWVx9+5NENv/jlic48krIcW9gYZoMgIghEQJZliYgxkY5CraO067TNnDF/Xuv5y5cuW7q0dfasluamdMbzPC+dyaRTKSIUMGW/XC77QRCWS34+XzrV033wYPvhQ52Hjx7p6u7s6e3OF/qjIJw5e+b1V11x1+23Xn31lS0tucgvcRRainAQzy2PwXJ3Tgm4upgn17kgCBAjjEDxV46bRlS79+x//KnnHn/q2f2HDpeCiEkp11XKRkBgiY+BJEQRNsDaaA61MCOCQlSWIotcx3U9L53OpjzPsjAyfhhG5aIfhjoIoyg0URSayCAIs0ZkL6Xmts265qorbrrhuquuWJfLZgLfD/yQEBRJzEUiAhIf8ANj8YCfIwJOMOfJ1oHUzE/NoTgMYgwgul4KLaez89QvN217/uVNW17dvu/Isf5SWSnbdV3bdrBygqRJWHCIUCEoFjFiIqOFTZUXVcSAGAHQRshSikBEi2glknHd+XNaL1p9/vXXXrNu7ZoF89sIIQhKhg3FrRSS0DORANearNFrZBou4NEKI08LFj11onMaiKvihiMAYWAWsBzHsj02dLLz1PZde365dduu1/cc6Wg/dbKrVC7rSKPlKNtGUoixSisBBAYGJjTx+XsiRoeBCLMYw2y0sSw1e3bL0kXz11500eWXrr1o9aq5c2ZaAFEUGh0JQNx9TJX0fKWEut6K24Z7rDKspuo0CniKyeNYyxK5Qu0JCPEhRcyCAGTZju2h7QR+1HGq89Chw7tf37173/7jHSe6+3rLflgsFiNjglAbbeKqW0WgLNsiZStlKUynnLY5sxcsmL98yXlLly5Zdt7iBXPnZDNpAOEwiKLQGE4YqKseqAyYt/qO1Tw7BDycqOeM8EAl/iiOQE8xUDidXMycFLIjobKUZdsIZAyXSn6hVCz45f5CMQyCQj4fhCGhhYiKlCLlep7retl0Kp1xctlsLpNVtgMiHAVBFLLRhEhIcXFdow7WqrNrYbrKZs8eActIm9iYlf4iYEAGjlkhshSRECplYVxJoBQAJa29wgDIwsZoEcPGgOaYO0AI41+hCgspVIlVp7z5nDYBW6NtmlO3q1O/G452Bxn7rwhqWzxZNGsRCCVAwKRdpbqEEz+s0g4EiBiTmiInN0oexpWOU6k5VB4F5CxlIR1JwIO85aksHRxP5nV65rXH+0j9QsYKflTt5UVEIFTDTh6lYY+p7AtD+TBHcHAFJi/dCanmaAdmTV6Dz55rsrsD1bfyeCx85py4Ji/gMbC4Mzs5ctZIR86CaZmCBotApY92XIM8mo2adE3BOPmy5ACds8H+TGxaRtnIYNLnRVvwRr5Of4LrDXf9/3WZXs+elIeAAAAAAElFTkSuQmCC" alt="Lyria mark" class="brand-icon">
+      <div class="wordmark-group">
+        <div class="wordmark">LYRIA</div>
+        <div class="strapline">Healthcare before you need it</div>
+      </div>
+    </div>
+    <div class="header-note">Registering with the CQC — not yet accepting patients</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero" style="padding:88px 32px 96px;">
+    <div>
+      <h1>Care, before it's urgent.</h1>
+      <p class="lede">A membership built around one idea: your health shouldn't only get attention once something's wrong. GP consultations and biomarker screening, on a plan that catches change early — without the wait.</p>
+      <div class="cta-row">
+        <a href="file:///Users/biyaserabuelgasim/Downloads/lyria-landing%20(3).html#waitlist" class="btn btn-primary">Join the waitlist</a>
+        <a href="file:///Users/biyaserabuelgasim/Downloads/lyria-landing%20(3).html#tiers" class="btn btn-ghost">See membership tiers</a>
+      </div>
+    </div>
+    <div class="ticket">
+      <div class="ticket-label">TYPICAL NHS GP WAIT (SELECTED AREAS)</div>
+      <div class="ticket-num">2–3<span style="font-size:22px;"> wks</span></div>
+      <div class="ticket-sub">for a routine, non-urgent appointment</div>
+      <div class="ticket-row">
+        <span>Lyria target</span>
+        <strong>Same week, every tier</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <blockquote>"I could tell you what my cholesterol was two years ago. I have no idea what it is now, or what to do about it."</blockquote>
+    <cite>— the gap Lyria is built to close</cite>
+  </div>
+</section>
+
+<section class="tiers" id="tiers">
+  <div class="wrap">
+    <div class="tiers-head">
+      <h2>Three ways in, one standard of care</h2>
+      <p>Every tier includes GP consultations and biomarker screening. Higher tiers add depth — more consultations, a wider panel, and closer tracking over time.</p>
+    </div>
+
+    <div class="tier">
+      <div class="tier-num">8<span>GP visits / yr</span></div>
+      <div class="tier-body">
+        <div class="tier-name">ESSENTIAL</div>
+        <h3>For staying ahead of the basics</h3>
+        <p>Eight GP consultations a year and an annual screening across the markers that matter most — cholesterol, thyroid, liver and kidney function, blood count.</p>
+      </div>
+      <div class="tier-price"><div class="amount">£24</div><div class="period">per month</div></div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-num">16<span>GP visits / yr</span></div>
+      <div class="tier-body">
+        <div class="tier-name">PLUS</div>
+        <h3>For tracking change over time</h3>
+        <p>Sixteen consultations, message-based GP access between visits, and screening twice a year across an expanded panel — so you can see what's actually moving.</p>
+      </div>
+      <div class="tier-price"><div class="amount">£49</div><div class="period">per month</div></div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-num">24<span>GP visits / yr</span></div>
+      <div class="tier-body">
+        <div class="tier-name">PREMIUM</div>
+        <h3>For the full picture</h3>
+        <p>Our deepest consultation allowance, comprehensive screening, priority specialist referral coordination, and a dedicated care coordinator.</p>
+      </div>
+      <div class="tier-price"><div class="amount">£99</div><div class="period">per month</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap founder-grid">
+    <div class="founder-photo"></div>
+    <div>
+      <h2>Led by a practising doctor</h2>
+      <div class="role">MBBS, BSc Endocrinology — Imperial College London</div>
+      <p>Lyria is built and clinically governed by a doctor still working within the NHS — not a wellness brand borrowing medical language. Every protocol, from consultation to result escalation, is written the way we'd want it done for our own family.</p>
+      <p>We're currently completing CQC registration. Nothing here is a live clinical service yet — joining the waitlist means you'll hear first when it is.</p>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist" id="waitlist">
+  <div class="wrap">
+    <div class="waitlist-box">
+      <div>
+        <h2>Be first to join</h2>
+        <p>We're opening membership in phases as our clinical and diagnostic partners come online. No spam — just a note when your tier is ready.</p>
+      </div>
+      <div>
+        <form id="waitlistForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="waitlist">
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <input type="email" name="email" id="emailInput" placeholder="you@email.com" required="">
+          <button type="submit" class="btn-gold">Join the waitlist</button>
+          <div class="form-note">We'll only use this to tell you when Lyria launches in your area.</div>
+        </form>
+        <div class="thanks" id="thanksMsg">You're on the list — thank you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>Lyria Health Ltd</div>
+      <div>hello@lyria.health</div>
+      <div>© 2026 Lyria</div>
+    </div>
+    <div class="disclaimer">
+      Lyria is currently completing registration with the Care Quality Commission and is not yet delivering regulated healthcare services. Membership tiers, consultation numbers and pricing shown are provisional and subject to change ahead of launch. Nothing on this page constitutes medical advice, and no diagnosis, treatment or health outcome is implied or guaranteed.
+      <br><br>
+      Lyria is a trading name of Lyria Health Ltd, a company registered in England and Wales (company number: to be added on incorporation). Registered office: [address to be added].
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('waitlistForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const thanks = document.getElementById('thanksMsg');
+    const formData = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+    })
+    .catch(() => {
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+    });
+  });
+</script>
+
+
+
+</body></html><script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="5731e7c7-2e6e-4b8c-8e33-56ad5be78dd8" data-app-host="app.netlify.com"></script>
