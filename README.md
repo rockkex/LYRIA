@@ -8,19 +8,21 @@ Design language: deep navy ink (`#1B2C47`), warm paper (`#F4F0E8`), gold accent 
 
 ## 1 · Quick start
 
+**Prereq:** a PostgreSQL database (local Docker, or a free [Neon](https://neon.tech) instance).
+
 ```bash
-bun install
-bun run db:push     # create SQLite tables
-bun run dev         # http://localhost:3000
+bun install        # runs `prisma generate` automatically (postinstall)
+bun run db:push    # create tables (reads DATABASE_URL from .env)
+bun run dev        # http://localhost:3000
 ```
 
-`.env` values:
+Copy `.env.example` to `.env` first. `.env` values:
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `DATABASE_URL` | ✅ | SQLite file (Prisma) |
-| `ADMIN_TOKEN` | recommended | Bearer token for CSV export / erasure endpoints |
-| `IP_HASH_SALT` | recommended | Salt used to hash IPs in the consent log (raw IPs are never stored) |
+| `DATABASE_URL` | ✅ | PostgreSQL connection string (Neon / Vercel Postgres / local) |
+| `ADMIN_TOKEN` | ✅ recommended | Bearer token for CSV export / erasure endpoints |
+| `IP_HASH_SALT` | ✅ recommended | Salt used to hash IPs in the consent log (raw IPs are never stored) |
 | `RESEND_API_KEY` | optional | When absent the app runs in **demo mode**: emails are not sent; the API returns the exact email HTML + a live confirm link so the whole double opt-in journey can be walked in the browser |
 | `CONFIRM_EMAIL_FROM` | optional | e.g. `Lyria <hello@lyriahealth.co.uk>` |
 | `NEXT_PUBLIC_APP_URL` | optional | Override for email link base URL (defaults to request origin) |
@@ -84,18 +86,77 @@ curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" \
   https://lyriahealth.co.uk/api/admin/delete
 ```
 
-## 5 · Deploy to Vercel + connect email
+## 5 · Deploy to Vercel (click-by-click)
 
-1. **Repo → Vercel**: import, framework preset Next.js. Use a real database for production (Vercel Postgres / Neon / Turso) — swap the Prisma `datasource` provider; the schema is unchanged.
-2. **Resend** (recommended): EU data residency, generous free tier, first-class API, handles SPF/DKIM tooling. Create the sending domain `lyriahealth.co.uk`, then set `RESEND_API_KEY` and `CONFIRM_EMAIL_FROM`.
-3. **DNS records at the registrar** (exact values are shown in the Resend dashboard):
+### 5.1 — Push the code to GitHub
+
+```bash
+git remote add origin git@github.com:YOUR-USERNAME/lyria-waitlist.git
+git push -u origin main
+```
+
+(`.env` is gitignored — your secrets never leave your machine. Committing the code as-is is safe.)
+
+### 5.2 — Import into Vercel
+
+1. Go to **vercel.com/new** and click **Import** next to the repo.
+2. Framework preset is auto-detected (**Next.js**) — leave all build settings as-is.
+3. **Before clicking Deploy**, open **Environment Variables** and add:
+   - `ADMIN_TOKEN` → `openssl rand -hex 32`
+   - `IP_HASH_SALT` → `openssl rand -hex 32`
+   (no `DATABASE_URL` yet — the next step wires it automatically)
+4. Click **Deploy**. First build takes ~1 min.
+
+### 5.3 — Create the production database (1 click)
+
+1. In the Vercel project: **Storage** tab → **Create Database** → **Postgres (Neon)**.
+2. Choose the region closest to the UK (e.g. *Frankfurt · eu-central-1*) → **Create**.
+3. Vercel automatically injects `DATABASE_URL` into the project and **redeploys** — no manual env wiring needed.
+
+> Why Postgres instead of SQLite: Vercel functions have an ephemeral filesystem, so a file-based DB would silently lose sign-ups between requests. The Prisma schema is identical — only the provider line changed.
+
+### 5.4 — Create the tables in the production DB (one command)
+
+```bash
+# copy the connection string from Vercel → Storage → your DB → `.env.local`
+DATABASE_URL="postgresql://…-pooler…/neondb?sslmode=require" \
+  npx prisma db push
+```
+
+### 5.5 — Connect email (Resend — recommended: EU data residency, free tier)
+
+1. **resend.com** → sign up → **Domains** → add `lyriahealth.co.uk`.
+2. Resend shows the exact DNS records to add at the registrar:
    - `TXT @` — `v=spf1 include:amazonses.com ~all` (SPF)
-   - 3 × `TXT` under `resend._domainkey` / ` resend1._domainkey` … — DKIM keys from Resend
+   - 3 × `TXT` under `resend._domainkey` / `resend1._domainkey` … — DKIM keys
    - `TXT _dmarc` — `v=DMARC1; p=none; rua=mailto:hello@lyriahealth.co.uk` (tighten to `quarantine` once monitoring is clean)
    - `CNAME send.lyriahealth.co.uk` → Resend tracking domain (optional, open-rate tracking)
    - No MX changes needed — the domain only sends.
-4. **Domain in Vercel**: add `lyriahealth.co.uk` + `www`, point the registrar's `A`/`CNAME` records at Vercel. SSL is automatic.
-5. Once `RESEND_API_KEY` is set, demo mode disappears automatically — real emails are sent and the preview affordances vanish.
+3. **API Keys** → create key → add to Vercel as `RESEND_API_KEY`.
+4. Add `CONFIRM_EMAIL_FROM` = `Lyria <hello@lyriahealth.co.uk>`.
+5. Redeploy. Demo mode disappears automatically — real emails are sent and the preview affordances vanish.
+
+### 5.6 — Point the domain at Vercel (when the client is ready)
+
+1. Vercel project → **Settings → Domains** → add `lyriahealth.co.uk` and `www.lyriahealth.co.uk`.
+2. At the registrar, point `A @ → 76.76.21.21` and `CNAME www → cname.vercel-dns.com` (Vercel shows the exact values). SSL is automatic.
+
+### Alternative — Vercel CLI (no GitHub)
+
+```bash
+npm i -g vercel
+vercel          # link the project, follow prompts
+vercel env add ADMIN_TOKEN
+vercel env add IP_HASH_SALT
+vercel --prod
+```
+
+### Sanity checklist after deploying
+
+- [ ] Submit the form → success panel → (demo mode) email preview → click confirm → `?state=confirmed` banner
+- [ ] CSV export: `curl -H "Authorization: Bearer $ADMIN_TOKEN" https://YOUR-APP.vercel.app/api/admin/export -o waitlist.csv`
+- [ ] Erasure: `curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" -H "Content-Type: application/json" -d '{"email":"…"}' https://YOUR-APP.vercel.app/api/admin/delete`
+- [ ] Lighthouse mobile ≥ 90 (Chrome DevTools → Lighthouse → Mobile)
 
 ## 6 · Editing copy
 

@@ -52,3 +52,10 @@ prompt
 server.log
 # Skills directory
 /skills/
+# sandbox-only dev-server env (never commit)
+.env.startup
+
+# portable postgres (sandbox-only, never commit)
+scripts/pg/
+# env exception: template is safe to commit
+!.env.example
